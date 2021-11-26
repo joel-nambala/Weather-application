@@ -92,6 +92,16 @@ const getWeatherData = async function (lat, lng) {
     });
   } catch (err) {
     console.log(`${err.message}`);
+
+    const html = `
+          <div class="current-forecast">
+            <div class="alert alert-danger">
+            ${err.message}. Please check your internet connection
+            </div>
+          </div>
+      `;
+
+    weatherForecast.insertAdjacentHTML('beforeend', html);
   }
 };
 
@@ -107,6 +117,6 @@ navigator.geolocation.getCurrentPosition(
   },
   function () {
     // Display an error when the fetch fails
-    alert("Could't get the data");
+    alert('Please turn on your location');
   }
 );
